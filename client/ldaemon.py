@@ -1,10 +1,10 @@
 import SocketServer
 import logging
-import getpass
+import getuser
 
 class RequestHandler(SocketServer.BaseRequestHandler):
     def handle(self):
-        name = getpass.getuser()
+        name = getuser.lookup_username()
         logging.debug("Returning that user is %s", name)
         self.request.send(name + '\n')
 
