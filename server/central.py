@@ -58,9 +58,11 @@ class CentralControl():
             thread.start()
 
         # we need to keep this thread running to check thread status
-        # Luckily, threading.join() works just fine.
-        for thread in self.threads:
-            thread.join()
+        while(True):
+            if not any([thread.isAlive() for thread in self.threads]):
+                break
+            else:
+                time.sleep(1)
 
         self.logger.info("All threads have exited, now exiting program")
 
